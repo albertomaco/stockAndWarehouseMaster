@@ -59,7 +59,7 @@ const routes: Routes = [
             canLoad: []
       },
       {
-            path: 'almacen', loadChildren: () => import('./almacen/almacen.module').then(m => m.AlmacenesModule),
+            path: 'almacenes', loadChildren: () => import('./almacen/almacen.module').then(m => m.AlmacenesModule),
             canActivate:[ProdGuardService],
             data: { expectedRol: ['admin'] },
             canLoad: []

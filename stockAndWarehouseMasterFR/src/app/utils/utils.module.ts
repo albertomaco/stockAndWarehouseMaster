@@ -11,6 +11,8 @@ import { ConfirmacionesModalComponent } from "./confirmaciones-modal/confirmacio
 import { AlmacenDetailComponent } from "./almacen-detail/almacen-detail.component";
 import { StocksDetailComponent } from "./stocks-detail/stocks-detail.component";
 import { ProductoCatalogoDetailComponent } from "./producto-catalogo-modal/producto-catalogo-modal.component";
+import { FooterComponent } from "./footer/footer.component";
+import { ProfileDetailModalComponent } from "./profile-detail/profile-detail.component";
 
 @NgModule({
     providers:[ProductosService],
@@ -21,6 +23,8 @@ import { ProductoCatalogoDetailComponent } from "./producto-catalogo-modal/produ
         AlmacenDetailComponent,
         StocksDetailComponent,
         ProductoCatalogoDetailComponent,
+        FooterComponent,
+        ProfileDetailModalComponent
     ],
     imports: [
         CommonModule,
@@ -37,6 +41,8 @@ import { ProductoCatalogoDetailComponent } from "./producto-catalogo-modal/produ
         AlmacenDetailComponent,
         StocksDetailComponent,
         ProductoCatalogoDetailComponent,
+        FooterComponent,
+        ProfileDetailModalComponent
     ]
 })
 export class UtilsModule{ }

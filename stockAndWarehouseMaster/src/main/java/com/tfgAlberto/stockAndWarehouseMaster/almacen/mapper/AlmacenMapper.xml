@@ -33,8 +33,12 @@
         (#{id}, #{nombre}, #{ubicacion}, #{userId})
     </insert>
 
-	<select id="findAll" resultMap="resultMapAlmacen">
+	<select id="findAllActives" resultMap="resultMapAlmacen">
         SELECT * FROM ALMACENES WHERE ACTIVO = true ORDER BY ID
+    </select>
+    
+    <select id="findAllComplete" resultMap="resultMapAlmacen">
+        SELECT * FROM ALMACENES ORDER BY ID
     </select>
     
     <select id="findById" resultMap="resultMapAlmacen">
@@ -53,7 +57,8 @@
 		UPDATE ALMACENES
 		SET 
 			NOMBRE = #{nombre},
-			UBICACION = #{ubicacion}
+			UBICACION = #{ubicacion},
+			ACTIVO = #{activo}
 		WHERE 
 			USER_ID = #{userId}
 	</update>

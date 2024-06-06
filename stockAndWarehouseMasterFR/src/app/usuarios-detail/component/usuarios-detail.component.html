@@ -16,15 +16,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let usuario of usuarios">
+      <tr *ngFor="let usuario of pagedUsuarios">
         <td></td>
         <td>{{usuario.nombre}}</td>
-        <!--<td>
-          <input type="text" [(ngModel)]="usuario.nombre" class="form-control" style="width: 70%;">
-        </td>
-        <td>
-          <input type="text" [(ngModel)]="usuario.apellidos" class="form-control" style="width: 70%;">
-        </td>-->
         <td>{{usuario.email}}</td>
         <td>{{usuario.username}}</td>
         <td>{{usuario.telefono}}</td>
@@ -43,10 +37,11 @@
           </button>
         </td>
         <td><button class="btn btn-outline-danger" (click)="borrar(usuario)"><i class="far fa-trash-alt"></i>
-            Eliminar</button></td>
+            </button></td>
         <td><button class="btn btn-outline-warning" (click)="editar(usuario)"><i class="fa-regular fa-floppy-disk"></i>
-            Editar</button></td>
+            </button></td>
       </tr>
     </tbody>
   </table>
+  <mat-paginator [length]="usuarios.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
 </div>

@@ -8,6 +8,8 @@ import { PedidosRoutingModule } from "./pedidos-routing.module";
 import { PedidoDetailComponent } from "./component/pedido-detail/pedido-detail.component";
 import { AlmacenPedidosComponent } from "./component/pedidos-almacen/pedidos.almacen.component";
 import { NgxSpinnerModule } from "ngx-spinner";
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
     providers:  [ PedidosService],
@@ -17,6 +19,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
         UtilsModule,
         HttpClientModule,
         CommonModule,
+        MatPaginatorModule,
+        MatTableModule,
         NgxSpinnerModule
     ]
 })

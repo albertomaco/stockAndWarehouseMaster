@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Camion } from '../model/camion';
 import { CamionesService } from '../service/camiones.service';
@@ -6,14 +6,23 @@ import { CamionDetailComponent } from '../../utils/camion-detail/camion-detail.c
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmacionesModalComponent } from '../../utils/confirmaciones-modal/confirmaciones-modal.component';
 import { ToastrService } from 'ngx-toastr';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-camiones',
   templateUrl: './camiones.component.html'
 })
-export class CamionesComponent implements OnInit {
+export class CamionesComponent implements OnInit, AfterViewInit {
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.paginator.page.subscribe(() => this.cargarPaginacion());
+  }
+  
   camiones: Camion[] = [];
+  pagedCamiones: Camion[] = [];
+  pageSize = 8;
 
   modalReference!: NgbModalRef;
 
@@ -36,6 +45,7 @@ export class CamionesComponent implements OnInit {
       if (response) {
         this.camiones = response;
         this.cargarEstados();
+        this.cargarPaginacion();
       }
     });
     
@@ -103,6 +113,14 @@ export class CamionesComponent implements OnInit {
         });
       }
     } catch (rejectedPromise) {
+    }
+  }
+
+  cargarPaginacion(): void {
+    if (this.paginator) {
+      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+      const endIndex = startIndex + this.paginator.pageSize;
+      this.pagedCamiones = this.camiones.slice(startIndex, endIndex);
     }
   }
 }

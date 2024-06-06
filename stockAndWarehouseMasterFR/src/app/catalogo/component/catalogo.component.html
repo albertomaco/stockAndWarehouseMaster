@@ -1,31 +1,9 @@
 <app-toolbar></app-toolbar>
 <div class="container">
-    <!--<table class="table table-dark">
-        <thead>
-            <tr>
-                <th scope="col"> </th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Stock</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let producto of productos">
-                <td>{{producto.photo}}</td>
-                <td>{{producto.nombre}}</td>
-                <td>{{producto.precio}}€</td>
-                <td>{{producto.stock}}</td>
-                <td><button class="btn btn-outline-light" (click)="aniadirProducto(producto)"><i class="fa-solid fa-plus"></i> Añadir al carrito</button></td>
-                <td style="width: 8%;"><input type="number" [(ngModel)]="producto.cantidadProductoPedido"  class="form-control" ></td>
-            </tr>
-        </tbody>
-    </table>-->
 
     <div class="row text-center">
 
-        <div class="col-lg-3 col-md-6 mb-4" *ngFor="let producto of productos">
+        <div class="col-lg-3 col-md-6 mb-4" *ngFor="let producto of pagedProds">
             <div class="card">
                 <div class="card-img-container">
                     <img class="card-img-top" [src]="'data:image/jpeg;base64,' + producto.photo" alt="">
@@ -39,6 +17,6 @@
                 </div>
             </div>
         </div>
-
     </div>
+    <mat-paginator [length]="productos.length" [pageSize]="pageSize" [pageSizeOptions]="[8, 12, 16]" showFirstLastButtons></mat-paginator>
 </div>

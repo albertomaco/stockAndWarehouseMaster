@@ -12,7 +12,9 @@ import { CestaModule } from './cesta/cesta.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
@@ -34,6 +36,9 @@ import { UsuariosDetailsModule } from './usuarios-detail/usuarios-detail.module'
     HttpClientModule,
     ReactiveFormsModule,
     CommonModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
     FormsModule,
     UtilsModule,
     HomeModule,
@@ -46,7 +51,7 @@ import { UsuariosDetailsModule } from './usuarios-detail/usuarios-detail.module'
     CamionesModule,
     CestaModule,
     NgxSpinnerModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [ InterceptorService],
   bootstrap: [AppComponent],

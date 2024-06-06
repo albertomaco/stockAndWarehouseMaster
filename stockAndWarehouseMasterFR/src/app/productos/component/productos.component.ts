@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ProductosService } from '../service/productos.service';
 import { Producto } from '../model/producto';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -9,14 +9,24 @@ import { StocksDetailComponent } from '../../utils/stocks-detail/stocks-detail.c
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../users/service/user.service';
 import { UsuariosDetailsService } from '../../usuarios-detail/service/usuarios-detail.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-productos',
   templateUrl: './productos.component.html'
 })
-export class ProductosComponent implements OnInit {
+export class ProductosComponent implements OnInit,AfterViewInit {
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.paginator.page.subscribe(() => this.cargarPaginacion());
+  }
+  
   productos: Producto[] = [];
+  pagedProds: Producto[] = [];
+  pageSize = 4;
 
   modalReference!: NgbModalRef;
 
@@ -63,6 +73,7 @@ export class ProductosComponent implements OnInit {
       this.service.lista().subscribe((response) => {
         if (response) {
           this.productos = response;
+          this.cargarPaginacion();
         }
       });
 
@@ -70,11 +81,19 @@ export class ProductosComponent implements OnInit {
       this.service.listaFabrica(this.username).subscribe((response) => {
         if (response) {
           this.productos = response;
+          this.cargarPaginacion();
         }
       });
 
     }
+  }
 
+  cargarPaginacion(): void {
+    if (this.paginator) {
+      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+      const endIndex = startIndex + this.paginator.pageSize;
+      this.pagedProds = this.productos.slice(startIndex, endIndex);
+    }
   }
 
   async crearProducto(): Promise<void> {

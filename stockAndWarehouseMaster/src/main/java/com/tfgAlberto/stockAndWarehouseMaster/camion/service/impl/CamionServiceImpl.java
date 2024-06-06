@@ -47,6 +47,12 @@ public class CamionServiceImpl implements CamionService{
 
 	@Override
 	public Camion getFirstLibre() {
-		return camionMapper.getFirstLibre();
+		Camion camionLibre = camionMapper.getFirstLibre();
+		if(null == camionLibre) {
+			camionLibre = camionMapper.getPrimerCamionEstadoOcupado();
+			camionLibre.setEstado(12);
+			camionMapper.cambiarEstadoCamion(camionLibre.getId(), camionLibre.getEstado());
+		}
+		return camionLibre;
 	}
 }

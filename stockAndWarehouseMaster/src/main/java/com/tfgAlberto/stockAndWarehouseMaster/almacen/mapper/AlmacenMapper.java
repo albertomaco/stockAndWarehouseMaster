@@ -16,7 +16,8 @@ public interface AlmacenMapper {
 
 	void insert(Almacen almacen);
 	void update(Almacen almacen);
-	List<Almacen> findAll();
+	List<Almacen> findAllActives();
+	List<Almacen> findAllComplete();
 	Optional<Almacen> findById(long id);
 	Almacen findByIdUsuario(long id);
 	void deleteAlmacenByIdUsuario(@Param("idUsuario") Long idUsuario);

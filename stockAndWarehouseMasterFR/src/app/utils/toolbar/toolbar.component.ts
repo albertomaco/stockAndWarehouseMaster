@@ -68,7 +68,7 @@ export class ToolbarComponent implements OnInit {
     this.router.navigate(['/camiones']);
   }
   navigateToAlmacenes(): void {
-    this.router.navigate(['/almacen']);
+    this.router.navigate(['/almacenes']);
   }
   navigateToPedidos(): void {
     this.router.navigate(['/pedidos']);

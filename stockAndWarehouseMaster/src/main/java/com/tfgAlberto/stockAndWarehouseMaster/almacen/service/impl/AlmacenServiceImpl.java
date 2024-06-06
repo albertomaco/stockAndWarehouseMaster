@@ -38,8 +38,13 @@ public class AlmacenServiceImpl implements AlmacenService {
 	}
 
 	@Override
-	public List<Almacen> findAll() {
-		return almacenMapper.findAll();
+	public List<Almacen> findAllActives() {
+		return almacenMapper.findAllActives();
+	}
+	
+	@Override
+	public List<Almacen> findAllComplete() {
+		return almacenMapper.findAllComplete();
 	}
 
 	@Override

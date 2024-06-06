@@ -4,6 +4,7 @@ import { HomeComponent } from "./component/home.component";
 import { UtilsModule } from "../utils/utils.module";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
+import { CarouselModule } from "ngx-owl-carousel-o";
 
 @NgModule({
     declarations: [HomeComponent],
@@ -11,7 +12,7 @@ import { BrowserModule } from "@angular/platform-browser";
         HomeRoutingModule,
         UtilsModule,
         CommonModule,
-        BrowserModule
+        CarouselModule
     ]
 })
 export class HomeModule{ }

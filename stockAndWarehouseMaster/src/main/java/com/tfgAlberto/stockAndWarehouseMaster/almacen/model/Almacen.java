@@ -5,7 +5,6 @@ import java.util.List;
 import com.tfgAlberto.stockAndWarehouseMaster.camion.model.Camion;
 import com.tfgAlberto.stockAndWarehouseMaster.pedidos.model.Pedido;
 import com.tfgAlberto.stockAndWarehouseMaster.productos.model.Producto;
-import com.tfgAlberto.stockAndWarehouseMaster.usuarios.model.Usuario;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +26,5 @@ public class Almacen{
 	private List<Producto> listaProductos;
 	private List<Camion> listaCamiones;
 	private List<Pedido> listaPedidos;
-	private List<Usuario> listaFabricantes;
 
 }

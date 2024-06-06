@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.tfgAlberto.stockAndWarehouseMaster.almacen.service.AlmacenService;
 import com.tfgAlberto.stockAndWarehouseMaster.payload.response.MessageResponse;
-import com.tfgAlberto.stockAndWarehouseMaster.productos.model.Producto;
 import com.tfgAlberto.stockAndWarehouseMaster.usuarios.model.RolUsuario;
 import com.tfgAlberto.stockAndWarehouseMaster.usuarios.model.Usuario;
 import com.tfgAlberto.stockAndWarehouseMaster.usuarios.service.RolUsuarioService;

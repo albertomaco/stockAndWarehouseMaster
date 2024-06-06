@@ -1,26 +1,11 @@
-<app-toolbar></app-toolbar>
 <div class="container">
     <div style="float: left; width: 25%; padding: 20px;">
-        <img *ngIf="usuarioLoggeado.photo !== null" class="card-img-top"
-            [src]="'data:image/jpeg;base64,' + usuarioLoggeado.photo" alt="Imagen perfil usuario">
-        <img *ngIf="usuarioLoggeado.photo === null" class="card-img-top"
-            src="https://www.kindpng.com/picc/m/150-1503934_computer-icons-scalable-vector-graphics-user-profile-user.png"
-            alt="Card image cap">
-    </div>
-    <div style="float: left; width: 75%; padding: 20px;" *ngIf="!editarPerfil">
-        <h2 class="card-title">{{usuarioLoggeado.nombre}}</h2>
-        <h5>Nombre de usuario: {{usuarioLoggeado.username}}</h5>
-        <h5>Correo electrónico: {{usuarioLoggeado.email}}</h5>
-        <h5>Fecha de alta: {{usuarioLoggeado.fechaAlta | date: 'dd-MM-yyyy'}}</h5>
-        <h5>Teléfono: {{usuarioLoggeado.telefono}}</h5>
-        <p *ngFor="let rol of usuarioLoggeado.roles">{{rol.name}}</p>
-
-        <div style=" align-self: flex-end;">
-            <button class="btn btn-info" (click)="edicionPerfil()">Completar perfil</button>
-        </div>
+        <img *ngIf="usuarioLoggeado.photo !== null" class="card-img-top" [src]="'data:image/jpeg;base64,' + usuarioLoggeado.photo" alt="Imagen perfil usuario">
+        <img *ngIf="usuarioLoggeado.photo === null" class="card-img-top" src="https://www.kindpng.com/picc/m/150-1503934_computer-icons-scalable-vector-graphics-user-profile-user.png" alt="Card image cap">
+        <p *ngFor="let rol of usuarioLoggeado.roles" class="mt-2"> - {{rol.name}}</p>
     </div>
 
-    <div style="float: left; width: 75%; padding: 20px;" *ngIf="editarPerfil">
+    <div style="float: left; width: 75%; padding: 20px;">
         <form [formGroup]="form">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
@@ -60,11 +45,13 @@
                 <input type="file" class="form-control-file" id="imagen" name="imagen" (change)="onSelectFile($event)">
             </div>
         </form>
-        <div style=" align-self: flex-end;">
-            <button type="submit" class="btn btn-info ms-2" (click)="actualizar()">Guardar</button>
-            <button type="submit" class="btn btn-info ms-2 ml-3" (click)="cancelar()">Cancelar</button>
-        </div>
     </div>
 
-    <app-footer></app-footer>
 </div>
+
+<button type="button" class="btn btn-secondary" (click)="cancel()">
+    Cancelar
+</button>
+<button type="submit" class="btn btn-primary ms-2" (click)="actualizar()">
+    Actualizar
+</button>

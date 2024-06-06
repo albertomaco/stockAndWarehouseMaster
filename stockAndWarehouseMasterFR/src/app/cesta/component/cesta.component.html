@@ -10,9 +10,9 @@
                     <h5 class="card-title" *ngIf="!isLogged">
                         *NECESITA INICIAR SESIÓN PARA REALIZAR EL PEDIDO*
                     </h5>
-                    <h5 class="card-title" *ngIf="isLogged">
+                    <h2 class="card-title" *ngIf="isLogged">
                         DATOS DEL USUARIO
-                    </h5>
+                    </h2>
                     <h6 *ngIf="isLogged">Usuario: {{usuarioLoggeado?.nombre}}</h6>
                     <h6 *ngIf="isLogged">Correo: {{usuarioLoggeado?.email}}</h6>
 

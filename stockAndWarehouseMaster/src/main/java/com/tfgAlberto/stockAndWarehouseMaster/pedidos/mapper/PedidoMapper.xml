@@ -53,7 +53,7 @@
     </select>
     
     <select id="findAllPedidosUsuario" resultMap="resultMapPedido">
-        SELECT * FROM PEDIDOS WHERE ID_USUARIO = #{userId}
+        SELECT * FROM PEDIDOS WHERE ID_USUARIO = #{userId} ORDER BY FECHA_PEDIDO
     </select>
 
 	<select id="findById" resultMap="resultMapPedido">

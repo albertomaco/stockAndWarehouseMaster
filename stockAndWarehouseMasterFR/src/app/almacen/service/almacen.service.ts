@@ -23,14 +23,16 @@ export class AlmacenService{
     }
 
     public lista(): Observable<Almacen[]> {
-        return this.httpClient.get<Almacen[]>(this.productoURL + 'listaAlmacenes');
+        return this.httpClient.get<Almacen[]>(this.productoURL + 'listaAlmacenesActivos');
+    }
+
+    public listaTodos(): Observable<Almacen[]> {
+        return this.httpClient.get<Almacen[]>(this.productoURL + 'listaCompletaAlmacenes');
     }
 
     public detail(id: number): Observable<Almacen> {
         return this.httpClient.get<Almacen>(this.productoURL + `detail/${id}`);
     }
 
-    public delete(almacen: Almacen): Observable<any> {
-        return this.httpClient.post<any>(this.productoURL + 'deleteAlmacen', almacen);
-    }
+
 }

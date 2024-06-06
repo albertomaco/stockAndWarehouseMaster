@@ -1,23 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PedidosService } from '../service/pedidos.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../users/service/user.service';
 import { Pedido } from '../model/pedido';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html'
 })
-export class PedidosComponent implements OnInit {
+export class PedidosComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(MatPaginator) paginator1!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.paginator1.page.subscribe(() => this.cargarPaginacion());
+  }
 
   mostrarTablaTodos: boolean = true;
   mostrarTablaPendientes: boolean = false;
 
   username = '';
   pedidosTotalesUsu: Pedido[] = [];
+  pagedPedidosTotales: Pedido[] = [];
   pedidosNoGestionados: Pedido[] = [];
+
+  page1Size = 2;
 
   constructor(
     private readonly modalService: NgbModal,
@@ -36,6 +46,7 @@ export class PedidosComponent implements OnInit {
           this.pedidosTotalesUsu = response;
           this.cargarEstados();
           this.verEstadosPedidos(this.pedidosTotalesUsu);
+          this.cargarPaginacion();
         }
       })
     }
@@ -70,14 +81,23 @@ export class PedidosComponent implements OnInit {
   }
 
   verEstadosPedidos(listaPedidosTotalesUsuario: Pedido[]) {
-    listaPedidosTotalesUsuario.forEach(p=>{
-        if(p.estado === 5){
-            this.pedidosNoGestionados.push(p);
-        }
+    listaPedidosTotalesUsuario.forEach(p => {
+      if (p.estado === 5) {
+        this.pedidosNoGestionados.push(p);
+      }
     });
-}
+  }
 
-  verDetallePedido(id: number):void{
+  cargarPaginacion(): void {
+    if (this.paginator1) {
+      const startIndex = this.paginator1.pageIndex * this.paginator1.pageSize;
+      const endIndex = startIndex + this.paginator1.pageSize;
+      this.pagedPedidosTotales = this.pedidosTotalesUsu.slice(startIndex, endIndex);
+    }
+  }
+
+
+  verDetallePedido(id: number): void {
     this.router.navigate([`/pedidos/detalle-pedido/${id}`]);
   }
 

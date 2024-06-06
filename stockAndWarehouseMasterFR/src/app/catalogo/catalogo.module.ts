@@ -5,6 +5,8 @@ import { CatalogoRoutingModule } from "./catalogo-routing.module";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
     declarations: [CatalogoComponent],
@@ -12,6 +14,8 @@ import { NgSelectModule } from "@ng-select/ng-select";
         CatalogoRoutingModule,
         UtilsModule,
         CommonModule,
+        MatPaginatorModule,
+        MatTableModule,
         FormsModule,
         ReactiveFormsModule,
         NgSelectModule

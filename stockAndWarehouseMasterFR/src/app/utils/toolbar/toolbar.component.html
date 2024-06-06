@@ -7,12 +7,12 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto" style="margin-right: 10px;">
+        <ul class="navbar-nav ml-auto" style="margin-right: 20px;">
             <li class="navbar-item"><a class="aToolbar" (click)="navigateToHome()" title="inicio"><i
                         class="fas fa-home"></i> {{'Inicio'}}</a>
             </li>
             <li class="navbar-item"><a class="aToolbar" (click)="navigateToCatalogo()"
-                    title="catalogo">{{'Catalogo'}}</a>
+                    title="catalogo">{{'Catálogo'}}</a>
             </li>
             <li class="navbar-item" *ngIf="isAlmacen || isFabrica"><a class="aToolbar" (click)="navigateToProductos()"
                     title="productos">{{'Productos'}}</a>
@@ -37,7 +37,7 @@
                 </div>
             </li>
 
-            <li class="navbar-item dropdown" ngbDropdown *ngIf="isLogged">
+            <li class="navbar-item " ngbDropdown *ngIf="isLogged" >
                 <a class="navbar-item dropdown-toggle" id="navbarDropdown" role="button" aria-haspopup="true"
                     aria-expanded="false" ngbDropdownToggle><i class="fa fa-user" aria-hidden="true"></i>
                     {{'Cuenta'}}

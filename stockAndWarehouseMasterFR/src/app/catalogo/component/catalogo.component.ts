@@ -1,18 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Producto } from '../../productos/model/producto';
 import { ToastrService } from 'ngx-toastr';
 import { ProductosService } from '../../productos/service/productos.service';
 import { ProductoCatalogoDetailComponent } from '../../utils/producto-catalogo-modal/producto-catalogo-modal.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-catalogo',
-  templateUrl: './catalogo.component.html'
+  templateUrl: './catalogo.component.html',
 })
-export class CatalogoComponent implements OnInit {
+export class CatalogoComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.paginator.page.subscribe(() => this.cargarPaginacion());
+  }
 
   productos: Producto[] = [];
+  pagedProds: Producto[] = [];
+  pageSize = 8;
+
   productosEnCarrito: Producto[] = [];
 
   modalReference!: NgbModalRef;
@@ -34,12 +44,17 @@ export class CatalogoComponent implements OnInit {
     this.productoService.lista().subscribe((response) => {
       if (response) {
         this.productos = response;
+        this.cargarPaginacion();
       }
     });
   }
 
-  aniadirProducto(producto: Producto): void {
-
+  cargarPaginacion(): void {
+    if (this.paginator) {
+      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+      const endIndex = startIndex + this.paginator.pageSize;
+      this.pagedProds = this.productos.slice(startIndex, endIndex);
+    }
   }
 
   async verProducto(producto: Producto): Promise<void> {
@@ -61,9 +76,9 @@ export class CatalogoComponent implements OnInit {
 
         const index = this.productosEnCarrito.findIndex(prod => prod.id === guardarProductoCarrito.id);
         if (index !== -1) {
-          this.productosEnCarrito[index].cantidadProductoPedido +=  guardarProductoCarrito.cantidadProductoPedido;
-          this.productosEnCarrito[index].precioCantidadTotal +=  Number(guardarProductoCarrito.precioCantidadTotal.toFixed(2));
-        }else{
+          this.productosEnCarrito[index].cantidadProductoPedido += guardarProductoCarrito.cantidadProductoPedido;
+          this.productosEnCarrito[index].precioCantidadTotal += Number(guardarProductoCarrito.precioCantidadTotal.toFixed(2));
+        } else {
           this.productosEnCarrito.push(guardarProductoCarrito);
         }
 

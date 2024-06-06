@@ -61,13 +61,17 @@ public class PedidoController {
 
 				if(!almacenes.isEmpty()){
 					pedido.setListaAlmacenesProducto(almacenes);
-					//buscar camion libre
+
 					Camion camionRepartoPedido = camionService.getFirstLibre();
-					pedido.setCamionPedido(camionRepartoPedido);
-					pedido.setIdCamion(camionRepartoPedido.getId());
-					//insertar pedido
-					pedidoService.insertPedido(pedido);
-					return new ResponseEntity<>(new MessageResponse("Pedido creado correctamente"), HttpStatus.OK);
+					if(null != camionRepartoPedido) {
+						pedido.setCamionPedido(camionRepartoPedido);
+						pedido.setIdCamion(camionRepartoPedido.getId());
+
+						pedidoService.insertPedido(pedido);
+						return new ResponseEntity<>(new MessageResponse("Pedido creado correctamente"), HttpStatus.OK);
+					}else {
+						return new ResponseEntity<>(new MessageResponse("Algo salió mal, camiones no disponibles, vuelva a intentarlo"), HttpStatus.BAD_REQUEST);
+					}
 				}else {
 					return new ResponseEntity<>(new MessageResponse("Algo salió mal, por favor revise su pedido"), HttpStatus.BAD_REQUEST);
 				}

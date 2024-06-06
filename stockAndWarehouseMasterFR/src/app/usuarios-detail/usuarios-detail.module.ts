@@ -8,6 +8,8 @@ import { UsuariosDetailsRoutingModule } from "./usuarios-detail-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { ProfileUserComponent } from "./component/profile-user/profile-user.component";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
     providers:  [ UsuariosDetailsService],
@@ -19,7 +21,9 @@ import { ProfileUserComponent } from "./component/profile-user/profile-user.comp
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        NgSelectModule
+        NgSelectModule,
+        MatPaginatorModule,
+        MatTableModule
     ]
 })
 export class UsuariosDetailsModule{ }

@@ -5,6 +5,8 @@ import { ProductosRoutingModule } from "./productos-routing.module";
 import { ProductosService } from "./service/productos.service";
 import {  HttpClientModule } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
     providers:  [ ProductosService],
@@ -13,7 +15,9 @@ import { CommonModule } from "@angular/common";
         ProductosRoutingModule,
         UtilsModule,
         HttpClientModule,
-        CommonModule
+        CommonModule,
+        MatPaginatorModule,
+        MatTableModule
     ]
 })
 export class ProductosModule{ }

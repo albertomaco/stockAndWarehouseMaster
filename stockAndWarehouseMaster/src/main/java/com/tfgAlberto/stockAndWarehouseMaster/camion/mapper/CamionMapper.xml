@@ -48,6 +48,10 @@
         SELECT * FROM CAMIONES WHERE ESTADO = 12 ORDER BY ID LIMIT 1
     </select>
 
+	<select id="getPrimerCamionEstadoOcupado" resultType="com.tfgAlberto.stockAndWarehouseMaster.camion.model.Camion">
+        SELECT * FROM CAMIONES WHERE ESTADO = 13 ORDER BY ID LIMIT 1
+    </select>
+
     <update id="cambiarEstadoCamion" >
 		UPDATE CAMIONES
 		SET

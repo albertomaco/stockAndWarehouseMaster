@@ -47,9 +47,15 @@ public class AlmacenController {
 		return new ResponseEntity<>(new MessageResponse("Hubo algún problema, consulte con el administrador"), HttpStatus.BAD_REQUEST);
     }
 
-	@GetMapping("/listaAlmacenes")
-	public ResponseEntity<List<Almacen>> getAllAlmacenes() {
-		List<Almacen> listaProductos = almacenService.findAll();
+	@GetMapping("/listaCompletaAlmacenes")
+	public ResponseEntity<List<Almacen>> getAllAlmacenesIncludeFalses() {
+		List<Almacen> listaProductos = almacenService.findAllComplete();
+		return new ResponseEntity<List<Almacen>>(listaProductos, HttpStatus.OK);
+    }
+
+	@GetMapping("/listaAlmacenesActivos")
+	public ResponseEntity<List<Almacen>> getAllActives() {
+		List<Almacen> listaProductos = almacenService.findAllActives();
 		return new ResponseEntity<List<Almacen>>(listaProductos, HttpStatus.OK);
     }
 	
@@ -58,13 +64,5 @@ public class AlmacenController {
 		Almacen almacen = almacenService.findById(id).get();
 		return new ResponseEntity<Almacen>(almacen, HttpStatus.OK);
     }
-
-	/*@PostMapping("/deleteAlmacen")
-    public ResponseEntity<?> deleteAlmacen(@RequestBody Almacen almacen) {
-		if(null != almacen) {
-			almacenService.deleteAlmacen(almacen);
-		}
-		return new ResponseEntity(HttpStatus.OK);
-    }*/
 	
 }

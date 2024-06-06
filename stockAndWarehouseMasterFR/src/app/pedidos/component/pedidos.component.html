@@ -13,7 +13,7 @@
         </ul>
     </div>
     <div *ngIf="mostrarTablaTodos">
-        <div *ngFor="let pedido of pedidosTotalesUsu">
+        <div *ngFor="let pedido of pagedPedidosTotales">
             <div class="card mb-4">
                 <div style="display: flex; margin: 2%;">
                     <h2>Número de pedido: #{{pedido.id}}</h2>
@@ -32,9 +32,7 @@
                 </div>
                 <div style="display: flex; margin: 2%; border-bottom: 1px solid rgba(0, 0, 0, .125); padding-left: 10%;">
                     <div *ngFor="let al of pedido.listaAlmacenesProducto" style="display: flex;">
-                        <!--style="margin-right: 5%; display: flex;"-->
-                        <div *ngFor="let prod of al.listaProductos"><!--style=""-->
-                            <!--<p>{{prod.nombre}}</p>-->
+                        <div *ngFor="let prod of al.listaProductos">
                             <img [src]="'data:image/jpeg;base64,' + prod.photo" alt="Foto del producto" width="150" >
                         </div>
                     </div>
@@ -44,6 +42,7 @@
                 </div>
             </div>
         </div>
+        <mat-paginator [length]="pedidosTotalesUsu.length" [pageSize]="page1Size" [pageSizeOptions]="[2, 4, 8]" showFirstLastButtons></mat-paginator>
     </div>
     <div *ngIf="mostrarTablaPendientes">
         <div *ngFor="let pedido of pedidosNoGestionados">
@@ -65,9 +64,7 @@
                 </div>
                 <div style="display: flex; margin: 2%; border-bottom: 1px solid rgba(0, 0, 0, .125); padding-left: 10%;">
                     <div *ngFor="let al of pedido.listaAlmacenesProducto" style="display: flex;">
-                        <!--style="margin-right: 5%; display: flex;"-->
-                        <div *ngFor="let prod of al.listaProductos"><!--style=""-->
-                            <!--<p>{{prod.nombre}}</p>-->
+                        <div *ngFor="let prod of al.listaProductos">
                             <img [src]="'data:image/jpeg;base64,' + prod.photo" alt="Foto del producto" width="150" >
                         </div>
                     </div>

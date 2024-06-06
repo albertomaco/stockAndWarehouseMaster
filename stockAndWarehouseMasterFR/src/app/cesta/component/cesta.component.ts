@@ -76,8 +76,6 @@ export class CestaComponent implements OnInit {
     this.productosCesta = this.obtenerProductosDelCarrito();
 
     this.calcularTotal();
-    // const carritoString = localStorage.getItem('carrito');
-    // = carritoString ? JSON.parse(carritoString) : [];
   }
 
   removeItem(productoAEliminar: Producto): void {
@@ -87,7 +85,9 @@ export class CestaComponent implements OnInit {
       localStorage.setItem('carrito', JSON.stringify(this.productosCesta));
       this.calcularTotal();
     }
-
+    if(this.productosCesta.length<=0){
+      this.desplegableGestionPedido = false;
+    }
   }
 
   startOrder(): void {

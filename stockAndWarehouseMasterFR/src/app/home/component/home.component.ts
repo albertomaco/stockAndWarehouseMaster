@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { UserService } from "../../users/service/user.service";
 
 @Component({
@@ -8,10 +8,13 @@ import { UserService } from "../../users/service/user.service";
 })
 export class HomeComponent implements OnInit {
 
+    @ViewChild('carousel') carousel: any;
+
     images = [
-        { id: '1', url: 'assets/image1.jpg' },
-        { id: '2', url: 'assets/image2.jpg' },
-        { id: '3', url: 'assets/image3.jpg' }
+        { id: '1', url: 'assets/img/captura1.png' },
+        { id: '2', url: 'assets/img/captura2.png' },
+        { id: '3', url: 'assets/img/captura4.png' },
+        { id: '3', url: 'assets/img/captura5.png' }
     ];
 
     customOptions: any = {
@@ -25,19 +28,20 @@ export class HomeComponent implements OnInit {
         autoplayHoverPause: true,
         center: true,
         navSpeed: 700,
-        navText: ['Previous', 'Next'],
+        navText: ['', ''],
         responsive: {
             0: {
-                items: 1
+                items: 2
             },
             600: {
                 items: 2
             },
             1000: {
-                items: 3
+                items: 1
             }
         },
-        nav: true
+        margin: 10,
+        lazyLoad: true
     };
     isLogged = false;
     username = '';
@@ -53,4 +57,6 @@ export class HomeComponent implements OnInit {
             this.username = '';
         }
     }
+
+    
 }

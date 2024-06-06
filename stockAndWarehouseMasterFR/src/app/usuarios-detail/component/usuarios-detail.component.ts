@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmacionesModalComponent } from '../../utils/confirmaciones-modal/confirmaciones-modal.component';
@@ -8,14 +8,25 @@ import { ToastrService } from 'ngx-toastr';
 import { AlmacenService } from '../../almacen/service/almacen.service';
 import { Almacen } from '../../almacen/model/almacen';
 import { AlmacenDetailComponent } from '../../utils/almacen-detail/almacen-detail.component';
+import { MatPaginator } from '@angular/material/paginator';
+import { ProfileDetailModalComponent } from '../../utils/profile-detail/profile-detail.component';
 
 @Component({
   selector: 'app-usuarios-details',
   templateUrl: './usuarios-detail.component.html'
 })
-export class UsuariosDetailComponent implements OnInit {
+export class UsuariosDetailComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.paginator.page.subscribe(() => this.cargarPaginacion());
+  }
 
   usuarios: Usuario[] = [];
+  pagedUsuarios: Usuario[] = [];
+  pageSize = 5;
+
   almacenes: Almacen[] = [];
 
   modalReference!: NgbModalRef;
@@ -42,14 +53,45 @@ export class UsuariosDetailComponent implements OnInit {
         this.usuarios = response;
         this.usuarios.forEach(usuario => {
           this.rolesSeleccionados[usuario.id] = usuario.roles;
+          this.cargarPaginacion();
         });
       }
     });
 
   }
 
+  cargarPaginacion(): void {
+    if (this.paginator) {
+      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+      const endIndex = startIndex + this.paginator.pageSize;
+      this.pagedUsuarios = this.usuarios.slice(startIndex, endIndex);
+    }
+  }
 
   async editar(usuario: Usuario): Promise<void> {
+    this.modalReference = this.modalService.open(ProfileDetailModalComponent, {
+      ariaLabelledBy: 'Detalle productos',
+      backdrop: 'static',
+      centered: true,
+      keyboard: true,
+      size: 'lg',
+      scrollable: true,
+      windowClass: 'custom-modal',
+    });
+
+    (this.modalReference.componentInstance as ProfileDetailModalComponent).username = usuario.username;
+
+    try {
+      const result = await this.modalReference.result;
+      if (result) {
+        this.toastr.success('Usuario actualizado correctamente', 'ACCIÓN COMPLETADA CORRECAMENTE', {
+          timeOut: 3000, positionClass: 'toast-top-center'
+        });
+        this.cargarUsuarios();
+      }
+
+    } catch (rejectedPromise) {
+    }
   }
 
   async borrar(usuarioAEliminar: Usuario): Promise<void> {
@@ -66,7 +108,7 @@ export class UsuariosDetailComponent implements OnInit {
     try {
       const result = await this.modalReference.result;
       if (result) {
-        this.service.delete(usuarioAEliminar).subscribe(() =>{
+        this.service.delete(usuarioAEliminar).subscribe(() => {
           this.cargarUsuarios();
         });
       }

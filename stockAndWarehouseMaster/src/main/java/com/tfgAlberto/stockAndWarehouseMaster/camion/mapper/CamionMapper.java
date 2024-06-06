@@ -18,4 +18,5 @@ public interface CamionMapper {
 	void delete(Camion producto);
 	void cambiarEstadoCamion(@Param("idCamion") long idCamion, @Param("estado") long estado);
 	Camion getFirstLibre();
+	Camion getPrimerCamionEstadoOcupado();
 }

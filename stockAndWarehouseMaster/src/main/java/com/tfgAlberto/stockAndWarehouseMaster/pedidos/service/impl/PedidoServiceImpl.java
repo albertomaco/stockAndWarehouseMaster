@@ -57,9 +57,9 @@ public class PedidoServiceImpl implements PedidoService {
 		pedido.setFechaPedido(fechaActual);
 		pedido.setEstado(5);
 		pedidoMapper.insert(pedido);
-		//cambiar camión a ocupado
+
 		camionMapper.cambiarEstadoCamion(pedido.getIdCamion(), 13);
-		//restar stock a almacen y a stock-producto
+
 		for(Almacen almacen: pedido.getListaAlmacenesProducto()) {
 			for(Producto productoAlm: almacen.getListaProductos()) {
 				pedidoMapper.insertAlamcenesPedido(almacen.getId(), productoAlm.getId(), productoAlm.getCantidadProductoPedido());
@@ -148,30 +148,33 @@ public class PedidoServiceImpl implements PedidoService {
 				Pedido pedidoActualizadoEstado = pedidoMapper.findById(pedido.getId());
 				Usuario detalleUsuario = usuarioMapper.findDetailsById(pedido.getIdUsuario());
 
-			    if (pedidoActualizadoEstado.getEstado() < 8) {
+			    if (pedidoActualizadoEstado.getEstado() <= 8) {
 			        int nuevoEstado = pedidoActualizadoEstado.getEstado() + 1;
 			        pedidoActualizadoEstado.setEstado(nuevoEstado);
 			        pedidoMapper.update(pedidoActualizadoEstado);
+			        
 			        if(nuevoEstado == 6) {
 			        	try {
 							mailSender.sendMessagePedidoAceptado(detalleUsuario, pedido);
 						} catch (UnsupportedEncodingException | MessagingException e) {
 							e.printStackTrace();
 						}
+			        	
+			        }else if(nuevoEstado == 8) {
+			        	
+			        	Calendar calendar = Calendar.getInstance();
+						Date fechaActual = calendar.getTime();
+						pedido.setFechaPedido(fechaActual);
+						pedidoActualizadoEstado.setFechaEntrega(fechaActual);
+						pedidoMapper.update(pedidoActualizadoEstado);
+						camionMapper.cambiarEstadoCamion(pedidoActualizadoEstado.getIdCamion(), 12);
+				    	try {
+							mailSender.sendMessageEnvioEntregado(detalleUsuario, pedido);
+						} catch (UnsupportedEncodingException | MessagingException e) {
+							e.printStackTrace();
+						}
 			        }
 
-			    }else if(pedidoActualizadoEstado.getEstado() == 8) {
-			    	Calendar calendar = Calendar.getInstance();
-					Date fechaActual = calendar.getTime();
-					pedido.setFechaPedido(fechaActual);
-					pedidoActualizadoEstado.setFechaEntrega(fechaActual);
-					pedidoMapper.update(pedidoActualizadoEstado);
-
-			    	try {
-						mailSender.sendMessageEnvioEntregado(detalleUsuario, pedido);
-					} catch (UnsupportedEncodingException | MessagingException e) {
-						e.printStackTrace();
-					}
 			    }
 
 			}, 0, 30, TimeUnit.SECONDS);

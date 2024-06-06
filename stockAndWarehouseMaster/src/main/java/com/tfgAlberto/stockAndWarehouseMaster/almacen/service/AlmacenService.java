@@ -14,7 +14,8 @@ public interface AlmacenService {
 	void insertAlmacen(Almacen producto);
 	void updateAlmacen(Almacen producto);
 	void createAlmacenByUser(Usuario usuarioAlmacen);
-	List<Almacen> findAll();
+	List<Almacen> findAllActives();
+	List<Almacen> findAllComplete();
 	Optional<Almacen> findById(long id);
 	void deleteAlmacenByIdUsuario(Long idUsuario);
 	
