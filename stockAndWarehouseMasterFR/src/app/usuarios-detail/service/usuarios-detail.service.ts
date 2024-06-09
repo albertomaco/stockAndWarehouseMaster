@@ -2,13 +2,14 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Role, Usuario } from "../../users/model/usuario";
+import { SERVER_LOCAL, SERVER_USAL } from "../../utils/model/constantes";
 
 @Injectable({
     providedIn: 'root'
   })
 export class UsuariosDetailsService{
 
-    private usuariosURL = 'http://localhost:8080/stockAndWarehouseMaster/api/users/';
+    private usuariosURL = SERVER_USAL + '/api/users/';
 
     constructor(private httpClient : HttpClient) { }
 

@@ -1,12 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { SERVER_LOCAL, SERVER_USAL } from "../../utils/model/constantes";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    private authenticationURL = 'http://localhost:8080/stockAndWarehouseMaster/api/auth/';
+    private authenticationURL = SERVER_USAL + '/api/auth/';
 
     constructor(private httpClient: HttpClient) { }
 

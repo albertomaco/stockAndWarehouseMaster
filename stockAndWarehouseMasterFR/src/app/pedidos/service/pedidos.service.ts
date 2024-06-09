@@ -2,13 +2,14 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Pedido } from "../model/pedido";
+import { SERVER_LOCAL, SERVER_USAL } from "../../utils/model/constantes";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PedidosService {
 
-    private pedidoURL = 'http://localhost:8080/stockAndWarehouseMaster/api/pedido/';
+    private pedidoURL = SERVER_USAL + '/api/pedido/';
 
     constructor(private httpClient: HttpClient) { }
 

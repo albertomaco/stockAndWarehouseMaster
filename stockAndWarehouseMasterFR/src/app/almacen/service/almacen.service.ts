@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from "rxjs";
 import { Utilidad } from "../../utils/model/utilidades";
 import { Almacen } from "../model/almacen";
+import { SERVER_LOCAL, SERVER_USAL } from "../../utils/model/constantes";
 
 @Injectable({
     providedIn: 'root'
   })
 export class AlmacenService{
 
-    private productoURL = 'http://localhost:8080/stockAndWarehouseMaster/api/almacen/';
+    private productoURL = SERVER_USAL + '/api/almacen/';
 
     constructor(private httpClient : HttpClient) { }
 

@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Producto } from "../model/producto";
 import { Observable } from "rxjs";
+import { SERVER_LOCAL, SERVER_USAL } from "../../utils/model/constantes";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProductosService {
 
-    private productoURL = 'http://localhost:8080/stockAndWarehouseMaster/api/producto/';
+    private productoURL = SERVER_USAL + '/api/producto/';
 
     constructor(private httpClient: HttpClient) { }
 
