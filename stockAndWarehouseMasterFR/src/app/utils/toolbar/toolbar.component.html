@@ -51,8 +51,9 @@
                         sesión</button>
                 </div>
             </li>
-            <li class="navbar-item" *ngIf="!isAlmacen && !isFabrica"><a class="fa fa-shopping-cart" (click)="navigateToCesta()"
+            <li class="navbar-item"><a class="fa fa-shopping-cart"  *ngIf="!isAlmacen && !isFabrica" (click)="navigateToCesta()"
                     ></a></li>
+            <li class="navbar-item mr-7" *ngIf="isAlmacen || isFabrica"></li>
             <li class="nav-item" *ngIf="!isLogged">
                 <a class="aToolbar" (click)="navigateToLogin()"><i class="fas fa-sign-in-alt"></i> Iniciar
                     Sesión</a>

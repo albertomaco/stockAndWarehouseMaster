@@ -4,7 +4,7 @@
         <img *ngIf="usuarioLoggeado.photo !== null" class="card-img-top"
             [src]="'data:image/jpeg;base64,' + usuarioLoggeado.photo" alt="Imagen perfil usuario">
         <img *ngIf="usuarioLoggeado.photo === null" class="card-img-top"
-            src="https://www.kindpng.com/picc/m/150-1503934_computer-icons-scalable-vector-graphics-user-profile-user.png"
+            src="assets/img/userNotFound.jpg"
             alt="Card image cap">
     </div>
     <div style="float: left; width: 75%; padding: 20px;" *ngIf="!editarPerfil">
