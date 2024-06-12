@@ -13,7 +13,7 @@
             <dataSource type="POOLED">
                 <!-- Configuración de la fuente de datos (DataSource) -->
                 <property name="driver" value="org.postgresql.Driver" />
-                <property name="url" value="jdbc:postgresql://localhost:5432/stockAndWarehouseMaster" />
+                <property name="url" value="jdbc:postgresql://prodiasv21.fis.usal.es:5432/stockandwarehousemaster" />
                 <property name="username" value="postgres" />
                 <property name="password" value="root1234" />
             </dataSource>
