@@ -22,11 +22,12 @@
 
 	<mappers>
         <!-- Ruta al archivo XML de mapeo de entidades -->
-        <mapper resource="com/tfgAlberto/stockAndWarehouseMaster/almacen/mapper/AlmacenMapper.xml" />
-        <mapper resource="com/tfgAlberto/stockAndWarehouseMaster/camion/mapper/CamionMapper.xml" />
-        <mapper resource="com/tfgAlberto/stockAndWarehouseMaster/pedidos/mapper/PedidoMapper.xml" />
-        <mapper resource="com/tfgAlberto/stockAndWarehouseMaster/productos/mapper/ProductoMapper.xml" />
-        <mapper resource="com/tfgAlberto/stockAndWarehouseMaster/usuarios/mapper/UsuarioMapper.xml" />
+        <mapper resource="mappers/AlmacenMapper.xml" />
+        <mapper resource="mappers/CamionMapper.xml" />
+        <mapper resource="mappers/PedidoMapper.xml" />
+        <mapper resource="mappers/ProductoMapper.xml" />
+        <mapper resource="mappers/UsuarioMapper.xml" />
+        <mapper resource="mappers/RolUsuarioMapper.xml" />
     </mappers>
 
 </configuration>

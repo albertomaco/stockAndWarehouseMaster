@@ -29,6 +29,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@Valid @RequestBody SignupRequest signUpRequest) {
+    	System.out.println(signUpRequest.toString());
     	return authenticationService.signup(signUpRequest);
     }
 }
