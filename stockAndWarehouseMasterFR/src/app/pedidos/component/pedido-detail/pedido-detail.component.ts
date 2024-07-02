@@ -21,8 +21,8 @@ export class PedidoDetailComponent implements OnInit {
 
     ngOnInit() {
         this.estados = [
-            { numero: 5, nombre: 'Aceptado' },
-            { numero: 6, nombre: 'En preparación' },
+            { numero: 5, nombre: 'Pendiente' },
+            { numero: 6, nombre: 'Aceptado, en preparación' },
             { numero: 7, nombre: 'En reparto' },
             { numero: 8, nombre: 'Entregado' }
         ];
@@ -38,10 +38,10 @@ export class PedidoDetailComponent implements OnInit {
     cargarEstados(): void {
         switch (this.pedido.estado) {
             case 5:
-                this.pedido.estadoString = 'ACEPTADO';
+                this.pedido.estadoString = 'PENDIENTE';
                 break;
             case 6:
-                this.pedido.estadoString = 'EN PREPARACIÓN';
+                this.pedido.estadoString = 'ACEPTADO, EN PREPARACIÓN';
                 break;
             case 7:
                 this.pedido.estadoString = 'EN REPARTO';

@@ -56,10 +56,10 @@ export class PedidosComponent implements OnInit, AfterViewInit {
     this.pedidosTotalesUsu.forEach(pedido => {
       switch (pedido.estado) {
         case 5:
-          pedido.estadoString = 'ACEPTADO';
+          pedido.estadoString = 'PENDIENTE';
           break;
         case 6:
-          pedido.estadoString = 'EN PREPARACIÓN';
+          pedido.estadoString = 'ACEPTADO, EN PREPARACIÓN';
           break;
         case 7:
           pedido.estadoString = 'EN REPARTO';
